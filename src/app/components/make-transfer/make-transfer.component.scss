@@ -1,0 +1,56 @@
+@import '../../../vars';
+@import '../../../mixins';
+
+.formHeader {
+    @include formHeader;
+    span.material-icons {
+        @include material-icons;
+    }
+    span.header {
+        @include header;
+        strong {
+            font-weight: 900;
+        }
+    }
+}
+form { 
+    background-color: #fff;
+    padding: 20px; 
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px; 
+    .form-row {
+        padding: 5px 10px;
+        &.error {
+          input {
+              border: 1px solid red;
+          }  
+        } 
+        label {
+            display: block;
+            margin: 3px 0;
+        }
+        input {
+            padding: 3px 1px;
+            &.currency {
+                padding-right: 15px;
+            }
+            &::-webkit-input-placeholder {
+                @include placeholder;
+            }
+            &:-moz-placeholder {
+                @include placeholder;  
+            }
+            &::-moz-placeholder {
+                @include placeholder;  
+            }
+            &:-ms-input-placeholder {  
+                @include placeholder; 
+            }
+        }
+    }
+}
+.btn-warning {
+    color: #fff;
+    background-color: chocolate;
+    border-color: chocolate;
+}

@@ -1,0 +1,14 @@
+@import '../../../vars';
+
+footer {
+  height: 100%;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  color: $primary-blue;
+  p {
+    z-index: 1;
+  }
+}

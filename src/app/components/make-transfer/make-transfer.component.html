@@ -1,0 +1,61 @@
+<div class="formHeader">
+    <span class="material-icons">credit_card</span> 
+    <span class="header"><strong>Make</strong> Transfer</span>
+</div>
+<form [formGroup]="form" class="clearfix">
+    <div class="form-row">
+        <label for="fromAccount">From Account</label>
+        <input type="text" class="form-control" formControlName="fromAccount" readonly>
+    </div>
+    <div class="form-row" [ngClass]="{'error': toAccountError}">
+        <label for="toAccount">To Account</label>
+        <input type="text" class="form-control" formControlName="toAccount" placeholder="type an account number">
+        <div class="form-control-feedback">
+            <p *ngIf="toAccountError">To Account is required</p>
+        </div>
+    </div>
+
+    <div class="form-row"  [ngClass]="{'error': amountError}">
+        <label for="amount">Amount</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">€</span>
+            </div>
+            <input type="text" class="form-control" formControlName="amount" placeholder="specify the amount">
+        </div>
+        <div class="form-control-feedback">
+            <p *ngIf="amountError">{{amountErrorMessage}}</p>
+        </div>
+    </div>
+    <div class="form-row float-right">
+        <app-submit-button (submitForm)='submit()'></app-submit-button>
+    </div>
+</form>
+
+<!-- Modal start -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Review Transfer</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+            <p><i>Are you ready to send out this transfer?</i></p>
+            <p><strong>It will be send to account:</strong></p>
+            <p>{{toAccountTitle}}</p>
+            <p><strong>With the amount of:</strong></p>
+            <p>{{currency}} {{amountTitle}}</p>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel')">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="modal.close('Save')">Send Transfer</button>
+    </div>
+  </ng-template>
+  
+  <button id="content" class="btn btn-lg btn-outline-primary" (click)="open(content)" [hidden]="true"></button>
+  <!-- / Modal end -->
