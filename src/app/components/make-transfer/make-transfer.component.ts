@@ -12,9 +12,11 @@ import { ApiService } from 'src/app/services/api.service';
 export class MakeTransferComponent implements OnInit {
 
   // variable declaration
-  form: FormGroup;
-  toAccountError = false;
-  amountError = false;
+  // TODO - Need remote any and specify actual datatype
+  // TODO - access modifier
+  makeTransferForm: FormGroup;
+  isAccountInvalid = false;
+  isAmountInvalid = false;
   amountErrorMessage = '';
   totalBalance: any = '5824.76';
   closeResult = '';
@@ -29,7 +31,7 @@ export class MakeTransferComponent implements OnInit {
 
   ngOnInit(): void {
     // initialize the form
-    this.form = this.fb.group({
+    this.makeTransferForm = this.fb.group({
       fromAccount: [`My Personal Account ${this.currency} ${this.totalBalance}`],
       toAccount: ['', Validators.required],
       amount: ['', Validators.compose([Validators.required, Validators.min(1), Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)])]
@@ -50,38 +52,38 @@ export class MakeTransferComponent implements OnInit {
   // called when form submit
   submit = () => {
     // validation for To Account
-    if (this.form.controls.toAccount.status === 'INVALID') {
-      this.toAccountError = true;
+    if (this.makeTransferForm.controls.toAccount.status === 'INVALID') {
+      this.isAccountInvalid = true;
     } else {
-      this.toAccountError = false;
+      this.isAccountInvalid = false;
     }
-    console.log((parseFloat(this.totalBalance) + 500) + '>' + this.form.controls.amount.value);
+    console.log((parseFloat(this.totalBalance) + 500) + '>' + this.makeTransferForm.controls.amount.value);
     // validation for amount
-    if (this.form.controls.amount.status === 'INVALID') {
-      if (this.form.controls.amount.errors.min) {
-        this.amountError = true;
+    if (this.makeTransferForm.controls.amount.status === 'INVALID') {
+      if (this.makeTransferForm.controls.amount.errors.min) {
+        this.isAmountInvalid = true;
         this.amountErrorMessage = 'Amount must be greater than 0.';
       }
-      if (this.form.controls.amount.errors.required) {
-        this.amountError = true;
+      if (this.makeTransferForm.controls.amount.errors.required) {
+        this.isAmountInvalid = true;
         this.amountErrorMessage = 'Amount is required.';
       }
-      if (this.form.controls.amount.errors.pattern) {
-        this.amountError = true;
+      if (this.makeTransferForm.controls.amount.errors.pattern) {
+        this.isAmountInvalid = true;
         this.amountErrorMessage = 'Enter the valid amount.';
       }
-    } else if ((parseFloat(this.totalBalance) + 500) < this.form.controls.amount.value) {
-      this.amountError = true;
+    } else if ((parseFloat(this.totalBalance) + 500) < this.makeTransferForm.controls.amount.value) {
+      this.isAmountInvalid = true;
       this.amountErrorMessage = 'It should not allow amount below the total balance of -€500';
     } else {
-      this.amountError = false;
+      this.isAmountInvalid = false;
       this.amountErrorMessage = '';
     }
 
     // when all value valid
-    if (this.form.valid && !this.amountError) {
-      this.toAccountTitle = this.form.controls.toAccount.value;
-      this.amountTitle = this.form.controls.amount.value;
+    if (this.makeTransferForm.valid && !this.isAmountInvalid) {
+      this.toAccountTitle = this.makeTransferForm.controls.toAccount.value;
+      this.amountTitle = this.makeTransferForm.controls.amount.value;
 
       // open confirmation pop-up
       document.getElementById('content').click();
@@ -122,7 +124,7 @@ export class MakeTransferComponent implements OnInit {
         this.totalBalance = this.totalBalance - this.amountTitle;
 
         // reset the form
-        this.form.setValue({
+        this.makeTransferForm.setValue({
           fromAccount: `My Personal Account ${this.currency} ${this.totalBalance}`,
           toAccount: '',
           amount: ''

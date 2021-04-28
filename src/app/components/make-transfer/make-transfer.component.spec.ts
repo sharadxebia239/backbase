@@ -6,7 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('MakeTransferComponent', () => {
   let component: MakeTransferComponent;
   let fixture: ComponentFixture<MakeTransferComponent>;
-
+  // TODO - Naming convention 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -30,33 +30,34 @@ describe('MakeTransferComponent', () => {
   });
 
   it('form invalid when empty', () => {
-    expect(component.form.valid).toBeFalsy();
+    expect(component.makeTransferForm.valid).toBeFalsy();
   });
 
   it('toAccount field validation', () => {
     let errors = {};
-    const toAccount = 'toAccount';
-    const toAccountConst = component.form.controls[toAccount];
-    expect(toAccountConst.valid).toBeFalsy();
+    const toAccountName = 'toAccount';
+    const toAccountControl = component.makeTransferForm.controls[toAccountName];
+    // It should be mandetory
+    expect(toAccountControl.valid).toBeFalsy();
 
-    // toAccount field is required
-    errors = toAccountConst.errors || {};
-    const required = 'required';
-    expect(errors[required]).toBeTruthy();
+    errors = toAccountControl.errors || {};
+    const requiredName = 'required';
+    expect(errors[requiredName]).toBeTruthy();
   });
 
   it('amount field validation', () => {
     let errors = {};
     const amount = 'amount';
-    const amountConst = component.form.controls[amount];
+    const amountConst = component.makeTransferForm.controls[amount];
     const required = 'required';
     const min = 'min';
     const pattern = 'pattern';
     const requiredPattern = 'requiredPattern';
 
+    // 
     expect(amountConst.valid).toBeFalsy();
 
-    // amount field is required
+    
     errors = amountConst.errors || {};
     expect(errors[required]).toBeTruthy();
 
@@ -76,28 +77,28 @@ describe('MakeTransferComponent', () => {
   it('submitting blank form', () => {
     const toAccount = 'toAccount';
     const amount = 'amount';
-    expect(component.form.valid).toBeFalsy();
-    component.form.controls[toAccount].setValue('');
-    component.form.controls[amount].setValue('');
+    expect(component.makeTransferForm.valid).toBeFalsy();
+    component.makeTransferForm.controls[toAccount].setValue('');
+    component.makeTransferForm.controls[amount].setValue('');
 
     // Trigger the submit function
     component.submit();
-    expect(component.toAccountError).toBeTruthy();
-    expect(component.amountError).toBeTruthy();
+    expect(component.isAccountInvalid).toBeTruthy();
+    expect(component.isAmountInvalid).toBeTruthy();
     expect(component.amountErrorMessage).toContain('Amount is required.');
   });
 
   it('submitting form with negative amount', () => {
     const toAccount = 'toAccount';
     const amount = 'amount';
-    expect(component.form.valid).toBeFalsy();
-    component.form.controls[toAccount].setValue('SBBI12345678');
-    component.form.controls[amount].setValue('-1');
+    expect(component.makeTransferForm.valid).toBeFalsy();
+    component.makeTransferForm.controls[toAccount].setValue('SBBI12345678');
+    component.makeTransferForm.controls[amount].setValue('-1');
 
     // Trigger the submit function
     component.submit();
-    expect(component.toAccountError).toBeFalsy();
-    expect(component.amountError).toBeTruthy();
+    expect(component.isAccountInvalid).toBeFalsy();
+    expect(component.isAmountInvalid).toBeTruthy();
     expect(component.amountErrorMessage).toContain('Enter the valid amount.');
   });
 
@@ -105,15 +106,15 @@ describe('MakeTransferComponent', () => {
     const toAccount = 'toAccount';
     const amount = 'amount';
 
-    expect(component.form.valid).toBeFalsy();
+    expect(component.makeTransferForm.valid).toBeFalsy();
     component.totalBalance = '1000';
-    component.form.controls[toAccount].setValue('SBBI12345678');
-    component.form.controls[amount].setValue('1600');
+    component.makeTransferForm.controls[toAccount].setValue('SBBI12345678');
+    component.makeTransferForm.controls[amount].setValue('1600');
 
     // Trigger the submit function
     component.submit();
-    expect(component.toAccountError).toBeFalsy();
-    expect(component.amountError).toBeTruthy();
+    expect(component.isAccountInvalid).toBeFalsy();
+    expect(component.isAmountInvalid).toBeTruthy();
     expect(component.amountErrorMessage).toContain('It should not allow amount below the total balance of -€500');
   });
 
@@ -121,15 +122,15 @@ describe('MakeTransferComponent', () => {
     const toAccount = 'toAccount';
     const amount = 'amount';
 
-    expect(component.form.valid).toBeFalsy();
-    component.form.controls[toAccount].setValue('SBI123456789');
-    component.form.controls[amount].setValue('100');
-    expect(component.form.valid).toBeTruthy();
+    expect(component.makeTransferForm.valid).toBeFalsy();
+    component.makeTransferForm.controls[toAccount].setValue('SBI123456789');
+    component.makeTransferForm.controls[amount].setValue('100');
+    expect(component.makeTransferForm.valid).toBeTruthy();
 
     // Trigger the submit function
     component.submit();
-    expect(component.toAccountError).toBeFalsy();
-    expect(component.amountError).toBeFalsy();
+    expect(component.isAccountInvalid).toBeFalsy();
+    expect(component.isAmountInvalid).toBeFalsy();
     expect(component.amountErrorMessage).toBe('');
     expect(component.open.call).toBeTruthy();
   });
