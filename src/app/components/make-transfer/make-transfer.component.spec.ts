@@ -47,39 +47,39 @@ describe('MakeTransferComponent', () => {
 
   it('amount field validation', () => {
     let errors = {};
-    const amount = 'amount';
-    const amountConst = component.makeTransferForm.controls[amount];
-    const required = 'required';
-    const min = 'min';
-    const pattern = 'pattern';
-    const requiredPattern = 'requiredPattern';
+    const amountName = 'amount';
+    const amountControl = component.makeTransferForm.controls[amountName];
+    const requiredName = 'required';
+    const minName = 'min';
+    const patternName = 'pattern';
+    const requiredPatternName = 'requiredPattern';
 
     // 
-    expect(amountConst.valid).toBeFalsy();
+    expect(amountControl.valid).toBeFalsy();
 
     
-    errors = amountConst.errors || {};
-    expect(errors[required]).toBeTruthy();
+    errors = amountControl.errors || {};
+    expect(errors[requiredName]).toBeTruthy();
 
     // negative value validation
-    amountConst.setValue('-1');
-    errors = amountConst.errors || {};
-    expect(errors[required]).toBeFalsy();
-    expect(errors[min][min]).toBe(1);
+    amountControl.setValue('-1');
+    errors = amountControl.errors || {};
+    expect(errors[requiredName]).toBeFalsy();
+    expect(errors[minName][minName]).toBe(0.01);
 
     // pattern validation
-    amountConst.setValue('sddsa');
-    errors = amountConst.errors || {};
-    expect(errors[required]).toBeFalsy();
-    expect(errors[pattern][requiredPattern]).toBe('/^[0-9]+(\\.[0-9]{1,2})?$/');
+    amountControl.setValue('sddsa');
+    errors = amountControl.errors || {};
+    expect(errors[requiredName]).toBeFalsy();
+    expect(errors[patternName][requiredPatternName]).toBe('/^[0-9]+(\\.[0-9]{1,2})?$/');
   });
 
   it('submitting blank form', () => {
-    const toAccount = 'toAccount';
-    const amount = 'amount';
+    const toAccountName = 'toAccount';
+    const amountName = 'amount';
     expect(component.makeTransferForm.valid).toBeFalsy();
-    component.makeTransferForm.controls[toAccount].setValue('');
-    component.makeTransferForm.controls[amount].setValue('');
+    component.makeTransferForm.controls[toAccountName].setValue('');
+    component.makeTransferForm.controls[amountName].setValue('');
 
     // Trigger the submit function
     component.submit();
@@ -89,11 +89,11 @@ describe('MakeTransferComponent', () => {
   });
 
   it('submitting form with negative amount', () => {
-    const toAccount = 'toAccount';
-    const amount = 'amount';
+    const toAccountName = 'toAccount';
+    const amountName = 'amount';
     expect(component.makeTransferForm.valid).toBeFalsy();
-    component.makeTransferForm.controls[toAccount].setValue('SBBI12345678');
-    component.makeTransferForm.controls[amount].setValue('-1');
+    component.makeTransferForm.controls[toAccountName].setValue('SBBI12345678');
+    component.makeTransferForm.controls[amountName].setValue('-1');
 
     // Trigger the submit function
     component.submit();
@@ -103,13 +103,13 @@ describe('MakeTransferComponent', () => {
   });
 
   it('It should not allow amount below the total balance of -€500', () => {
-    const toAccount = 'toAccount';
-    const amount = 'amount';
+    const toAccountName = 'toAccount';
+    const amountName = 'amount';
 
     expect(component.makeTransferForm.valid).toBeFalsy();
     component.totalBalance = '1000';
-    component.makeTransferForm.controls[toAccount].setValue('SBBI12345678');
-    component.makeTransferForm.controls[amount].setValue('1600');
+    component.makeTransferForm.controls[toAccountName].setValue('SBBI12345678');
+    component.makeTransferForm.controls[amountName].setValue('1600');
 
     // Trigger the submit function
     component.submit();
@@ -119,12 +119,12 @@ describe('MakeTransferComponent', () => {
   });
 
   it('submitting a form', () => {
-    const toAccount = 'toAccount';
-    const amount = 'amount';
+    const toAccountName = 'toAccount';
+    const amountName = 'amount';
 
     expect(component.makeTransferForm.valid).toBeFalsy();
-    component.makeTransferForm.controls[toAccount].setValue('SBI123456789');
-    component.makeTransferForm.controls[amount].setValue('100');
+    component.makeTransferForm.controls[toAccountName].setValue('SBI123456789');
+    component.makeTransferForm.controls[amountName].setValue('100');
     expect(component.makeTransferForm.valid).toBeTruthy();
 
     // Trigger the submit function
@@ -134,5 +134,4 @@ describe('MakeTransferComponent', () => {
     expect(component.amountErrorMessage).toBe('');
     expect(component.open.call).toBeTruthy();
   });
-
 });

@@ -33,7 +33,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     app.search('1234');
-    expect(app.searchVal).toBe('1234');
+    expect(app.searchCriteria).toBe('1234');
 
     app.search('');
     expect(app.getTransactions.call).toBeTruthy();

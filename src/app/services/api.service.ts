@@ -10,11 +10,13 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // TODO - change the function name and logic - 1 hit from api if error then get from json file
   // get transactions data from json file
   getTransactionsFromJSON = () => {
     this.httpClient.get('assets/transactions.json').subscribe((response: any) => {
       response.data.sort((a, b) => new Date(b.dates.valueDate).getTime() - new Date(a.dates.valueDate).getTime());
       this.transactions.next(response);
+      console.log('this.transactions', this.transactions);
     }, error => {
       console.log(error);
     });

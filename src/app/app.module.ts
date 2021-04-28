@@ -12,6 +12,7 @@ import { SubmitButtonComponent } from './components/submit-button/submit-button.
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 
 const COMPONENTS = [
   AppComponent,
@@ -20,7 +21,8 @@ const COMPONENTS = [
   SubmitButtonComponent,
   FilterComponent,
   TransactionItemComponent,
-  MakeTransferComponent
+  MakeTransferComponent,
+  TransactionsListComponent
 ];
 
 @NgModule({

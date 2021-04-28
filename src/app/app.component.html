@@ -13,34 +13,7 @@
     <!-- / Make Transfer end -->
     <!-- Transaction List start -->
     <div class="flexsecond">
-      <div class="formHeader">
-        <span class="material-icons">format_list_bulleted</span>
-        <span class="header">Transaction <strong>List</strong></span>
-      </div>
-      <div class="container p-4">
-        <app-filter (inputChange)="search($event);"></app-filter>
-        <ul class="list-group" *ngIf="filterTransaction.length > 0">
-          <li class="list-group-item" *ngFor="let transaction of filterTransaction">
-            <!-- content projection start -->
-            <app-transaction-item class="row">
-              <div class="col-1 no-padding" data-test-hook='transactionColour'><div class="color" [ngStyle]="getRandomColor()"></div></div>
-              <div class="col-2 align-middle no-padding" data-test-hook='transactionDate'>{{transaction.dates.valueDate | date: 'MMM, YY'}}</div>
-              <strong data-test-hook='transactionMerchantName'>{{transaction.merchant.name}}</strong>
-              <p data-test-hook='transactionType'>{{transaction.transaction.type}}</p>
-              <div class="col float-right align-middle" data-test-hook='transactionAmount' [ngClass]="{'red': transaction.transaction.creditDebitIndicator == 'DBIT', 'green' : transaction.transaction.creditDebitIndicator == 'CRDT'}"> {{transaction.transaction.creditDebitIndicator == "DBIT" ? '-' : ''}}{{transaction.transaction.amountCurrency.amount | currency: transaction.transaction.amountCurrency.currencyCode}}</div>
-            </app-transaction-item>
-            <!-- / content projection end -->
-          </li>
-        </ul>
-        <ul class="list-group" *ngIf="filterTransaction.length == 0">
-          <li class="list-group-item">
-            <app-transaction-item class="row">
-              <div class="col-1 no-padding" data-test-hook='transactionColour'><div class="color" [ngStyle]="getRandomColor()"></div></div>
-              <strong data-test-hook='transactionMerchantName'>No Record Found!</strong>
-            </app-transaction-item>
-          </li>
-        </ul>
-      </div>
+        <app-transactions-list></app-transactions-list>
     </div>
     <!-- / Transaction List end -->
   </div>

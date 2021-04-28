@@ -7,15 +7,15 @@
         <label for="fromAccount">From Account</label>
         <input type="text" class="form-control" formControlName="fromAccount" readonly>
     </div>
-    <div class="form-row" [ngClass]="{'error': toAccountError}">
+    <div class="form-row" [ngClass]="{'error': isAccountInvalid}">
         <label for="toAccount">To Account</label>
         <input type="text" class="form-control" formControlName="toAccount" placeholder="type an account name">
         <div class="form-control-feedback">
-            <p *ngIf="toAccountError">To Account is required</p>
+            <p *ngIf="isAccountInvalid">To Account is required</p>
         </div>
     </div>
 
-    <div class="form-row"  [ngClass]="{'error': amountError}">
+    <div class="form-row"  [ngClass]="{'error': isAmountInvalid}">
         <label for="amount">Amount</label>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -24,7 +24,7 @@
             <input type="text" class="form-control" formControlName="amount" placeholder="specify the amount">
         </div>
         <div class="form-control-feedback">
-            <p *ngIf="amountError">{{amountErrorMessage}}</p>
+            <p *ngIf="isAmountInvalid">{{amountErrorMessage}}</p>
         </div>
     </div>
     <div class="form-row float-right">
@@ -45,9 +45,9 @@
         <div class="form-group">
             <p><i>Are you ready to send out this transfer?</i></p>
             <p><strong>It will be send to account:</strong></p>
-            <p>{{toAccountTitle}}</p>
+            <p>{{toAccount}}</p>
             <p><strong>With the amount of:</strong></p>
-            <p>{{currency}} {{amountTitle}}</p>
+            <p>{{currency}} {{transactionAmount}}</p>
         </div>
       </form>
     </div>
@@ -57,5 +57,5 @@
     </div>
   </ng-template>
   
-  <button id="content" class="btn btn-lg btn-outline-primary" (click)="open(content)" [hidden]="true"></button>
+  <button id="content" class="btn btn-lg btn-outline-primary" (click)="open()" [hidden]="true"></button>
   <!-- / Modal end -->
