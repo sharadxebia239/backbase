@@ -35,42 +35,50 @@ describe('MakeTransferComponent', () => {
 
   it('toAccount field validation', () => {
     let errors = {};
-    let toAccount = component.form.controls['toAccount'];
-    expect(toAccount.valid).toBeFalsy();
+    const toAccount = 'toAccount';
+    const toAccountConst = component.form.controls[toAccount];
+    expect(toAccountConst.valid).toBeFalsy();
 
     // toAccount field is required
-    errors = toAccount.errors || {};
-    expect(errors['required']).toBeTruthy();
+    errors = toAccountConst.errors || {};
+    const required = 'required';
+    expect(errors[required]).toBeTruthy();
   });
 
   it('amount field validation', () => {
     let errors = {};
-    let amount = component.form.controls['amount'];
-    expect(amount.valid).toBeFalsy();
+    const amount = 'amount';
+    const amountConst = component.form.controls[amount];
+    const required = 'required';
+    const min = 'min';
+    const pattern = 'pattern';
+    const requiredPattern = 'requiredPattern';
+
+    expect(amountConst.valid).toBeFalsy();
 
     // amount field is required
-    errors = amount.errors || {};
-    expect(errors['required']).toBeTruthy();
+    errors = amountConst.errors || {};
+    expect(errors[required]).toBeTruthy();
 
     // negative value validation
-    amount.setValue('-1');
-    errors = amount.errors || {};
-    console.log(errors['min']['min']);
-    expect(errors['required']).toBeFalsy();
-    expect(errors['min']['min']).toBe(1);
+    amountConst.setValue('-1');
+    errors = amountConst.errors || {};
+    expect(errors[required]).toBeFalsy();
+    expect(errors[min][min]).toBe(1);
 
-    // pattern validation 
-    amount.setValue('sddsa');
-    errors = amount.errors || {};
-    console.log(errors['pattern']['requiredPattern']);
-    expect(errors['required']).toBeFalsy();
-    expect(errors['pattern']['requiredPattern']).toBe("/^[.\\d]+$/");
+    // pattern validation
+    amountConst.setValue('sddsa');
+    errors = amountConst.errors || {};
+    expect(errors[required]).toBeFalsy();
+    expect(errors[pattern][requiredPattern]).toBe('/^[0-9]+(\\.[0-9]{1,2})?$/');
   });
 
   it('submitting blank form', () => {
+    const toAccount = 'toAccount';
+    const amount = 'amount';
     expect(component.form.valid).toBeFalsy();
-    component.form.controls['toAccount'].setValue("");
-    component.form.controls['amount'].setValue("");
+    component.form.controls[toAccount].setValue('');
+    component.form.controls[amount].setValue('');
 
     // Trigger the submit function
     component.submit();
@@ -80,9 +88,11 @@ describe('MakeTransferComponent', () => {
   });
 
   it('submitting form with negative amount', () => {
+    const toAccount = 'toAccount';
+    const amount = 'amount';
     expect(component.form.valid).toBeFalsy();
-    component.form.controls['toAccount'].setValue("SBBI12345678");
-    component.form.controls['amount'].setValue("-1");
+    component.form.controls[toAccount].setValue('SBBI12345678');
+    component.form.controls[amount].setValue('-1');
 
     // Trigger the submit function
     component.submit();
@@ -92,10 +102,13 @@ describe('MakeTransferComponent', () => {
   });
 
   it('It should not allow amount below the total balance of -€500', () => {
+    const toAccount = 'toAccount';
+    const amount = 'amount';
+
     expect(component.form.valid).toBeFalsy();
     component.totalBalance = '1000';
-    component.form.controls['toAccount'].setValue("SBBI12345678");
-    component.form.controls['amount'].setValue("700");
+    component.form.controls[toAccount].setValue('SBBI12345678');
+    component.form.controls[amount].setValue('1600');
 
     // Trigger the submit function
     component.submit();
@@ -105,9 +118,12 @@ describe('MakeTransferComponent', () => {
   });
 
   it('submitting a form', () => {
+    const toAccount = 'toAccount';
+    const amount = 'amount';
+
     expect(component.form.valid).toBeFalsy();
-    component.form.controls['toAccount'].setValue("SBI123456789");
-    component.form.controls['amount'].setValue("100");
+    component.form.controls[toAccount].setValue('SBI123456789');
+    component.form.controls[amount].setValue('100');
     expect(component.form.valid).toBeTruthy();
 
     // Trigger the submit function

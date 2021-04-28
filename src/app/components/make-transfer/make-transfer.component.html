@@ -9,7 +9,7 @@
     </div>
     <div class="form-row" [ngClass]="{'error': toAccountError}">
         <label for="toAccount">To Account</label>
-        <input type="text" class="form-control" formControlName="toAccount" placeholder="type an account number">
+        <input type="text" class="form-control" formControlName="toAccount" placeholder="type an account name">
         <div class="form-control-feedback">
             <p *ngIf="toAccountError">To Account is required</p>
         </div>
@@ -35,7 +35,7 @@
 <!-- Modal start -->
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Review Transfer</h4>
+      <h4 class="modal-title" id="modal-basic-title">Review Transfer</h4> 
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>

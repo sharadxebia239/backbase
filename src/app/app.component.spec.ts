@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.getRandomColor).toMatch('border-left');
     expect(app.getRandomColor.call).toBeTruthy();
-  })
+  });
 
   it('should filter the value', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -37,5 +37,5 @@ describe('AppComponent', () => {
 
     app.search('');
     expect(app.getTransactions.call).toBeTruthy();
-  })
+  });
 });

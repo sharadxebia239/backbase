@@ -18,15 +18,15 @@ describe('ApiService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should exist "getTransactionsFromJSON"', function () {
+  it('should exist getTransactionsFromJSON', () => {
     expect(service.getTransactionsFromJSON).toBeDefined();
   });
 
-  it('should exist "getTransactions"', function () {
+  it('should exist getTransactions', () => {
     expect(service.getTransactions).toBeDefined();
   });
 
-  it('should exist "setTransaction"', function () {
+  it('should exist setTransaction', () => {
     expect(service.setTransaction).toBeDefined();
   });
 });
