@@ -22,4 +22,17 @@ describe('TransactionsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('getRandomColor should return value', () => {
+    expect(component.getRandomColor).toMatch('border-left');
+    expect(component.getRandomColor.call).toBeTruthy();
+  });
+
+  it('should filter the value', () => {
+    component.search('1234');
+    expect(component.searchCriteria).toBe('1234');
+
+    component.search('');
+    expect(component.getTransactions.call).toBeTruthy();
+  });
 });

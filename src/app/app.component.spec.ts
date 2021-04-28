@@ -21,21 +21,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-
-  it('getRandomColor should return value', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.getRandomColor).toMatch('border-left');
-    expect(app.getRandomColor.call).toBeTruthy();
-  });
-
-  it('should filter the value', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    app.search('1234');
-    expect(app.searchCriteria).toBe('1234');
-
-    app.search('');
-    expect(app.getTransactions.call).toBeTruthy();
-  });
 });
