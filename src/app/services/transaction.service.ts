@@ -45,13 +45,13 @@ export class TransactionService {
   getTransactions(): Observable<any> {
     return this.transactions.asObservable();
   }
-  
+
   /**
    * @param newObject for new transaction
    * @description creating new transaction and update the list
    */
   createTransaction = (newObject: Itransaction) => {
-    let transactionsList = [...this.transactions.value, newObject];
+    const transactionsList = [...this.transactions.value, newObject];
     transactionsList.sort((a, b) => new Date(b.dates.valueDate).getTime() - new Date(a.dates.valueDate).getTime());
     this.transactions.next(transactionsList);
   }
