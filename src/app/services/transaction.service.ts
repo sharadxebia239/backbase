@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Itransaction } from '../itransaction';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Itransaction } from '../itransaction';
 })
 export class TransactionService {
 
-  private transactions: any = new Subject<any>();
+  private transactions: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   constructor(private httpClient: HttpClient) { }
 
   /**
@@ -45,21 +45,14 @@ export class TransactionService {
   getTransactions(): Observable<any> {
     return this.transactions.asObservable();
   }
+  
   /**
    * @param newObject for new transaction
    * @description creating new transaction and update the list
    */
   createTransaction = (newObject: Itransaction) => {
-    this.getTransactions().subscribe((response: any) => {
-      console.log(response);
-      if (response && response.length > 0) {
-        let transactionsList = response;
-        transactionsList.push(newObject);
-        console.log(transactionsList);
-        this.setTransaction(transactionsList);
-      }
-    }, error => {
-      console.error(error); // TODO - error always contain in console.error()
-    });
+    let transactionsList = [...this.transactions.value, newObject];
+    transactionsList.sort((a, b) => new Date(b.dates.valueDate).getTime() - new Date(a.dates.valueDate).getTime());
+    this.transactions.next(transactionsList);
   }
 }

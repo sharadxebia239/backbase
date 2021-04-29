@@ -30,7 +30,7 @@ export class TransactionsListComponent implements OnInit {
       if (response && response.length > 0) {
         this.transactions = response;
         this.filteredTransaction = this.transactions;
-
+        
         // filter transactions if search has some value
         if (this.searchCriteria) {
           this.search(this.searchCriteria);
