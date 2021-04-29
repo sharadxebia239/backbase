@@ -26,7 +26,6 @@ export class MakeTransferComponent implements OnInit {
   private transactionNewObject: Itransaction;
 
   constructor(private fb: FormBuilder, private confirmationService: NgbModal, private transService: TransactionService) {
-    this.getTransactions(); // TODO - remove
   }
 
   /**
@@ -42,20 +41,6 @@ export class MakeTransferComponent implements OnInit {
         Validators.min(0.01),
         Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/) // Numbers only with decimal two places
       ])]
-    });
-  }
-
-  // TODO - remove it and call directly by a public variable
-  /**
-   * @description get transaction list
-   */
-  getTransactions = () => {
-    this.transService.getTransactions().subscribe((response: any) => {
-      if (response && response.length > 0) {
-        this.transactions = response;
-      }
-    }, error => {
-      console.error(error); // TODO - error always contain in console.error()
     });
   }
 
@@ -130,8 +115,7 @@ export class MakeTransferComponent implements OnInit {
         };
 
         // update transaction list
-        this.transactions.push(this.transactionNewObject);
-        this.transService.setTransaction(this.transactions);
+        this.transService.createTransaction(this.transactionNewObject);
 
         // deduct the transfer amount from total balance
         this.totalBalance = this.totalBalance - this.transactionAmount;

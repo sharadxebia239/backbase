@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { Itransaction } from '../itransaction';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,22 @@ export class TransactionService {
    */
   getTransactions(): Observable<any> {
     return this.transactions.asObservable();
+  }
+  /**
+   * @param newObject for new transaction
+   * @description creating new transaction and update the list
+   */
+  createTransaction = (newObject: Itransaction) => {
+    this.getTransactions().subscribe((response: any) => {
+      console.log(response);
+      if (response && response.length > 0) {
+        let transactionsList = response;
+        transactionsList.push(newObject);
+        console.log(transactionsList);
+        this.setTransaction(transactionsList);
+      }
+    }, error => {
+      console.error(error); // TODO - error always contain in console.error()
+    });
   }
 }
