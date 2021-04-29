@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { Itransaction } from 'src/app/itransaction';
+import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
   selector: 'app-transactions-list',
@@ -8,22 +9,26 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TransactionsListComponent implements OnInit {
 
-  public transactions: any = [];
-  public filteredTransaction: any = [];
-  public searchCriteria: any = '';
-  constructor(private apiService: ApiService) {
-    this.apiService.getTransactionsFromJSON();
+  public transactions: Array<Itransaction> = [];
+  public filteredTransaction: Array<Itransaction> = [];
+  public searchCriteria = '';
+  constructor(private transService: TransactionService) { }
+
+  /**
+   * @returns void
+   */
+  ngOnInit(): void {
+    this.transService.getTransactionsList();
     this.getTransactions();
   }
 
-  ngOnInit(): void {
-  }
-
-  // get transaction data
+  /**
+   * @description get transaction data
+   */
   getTransactions = () => {
-    this.apiService.getTransactions().subscribe((response: any) => {
-      if (response && response.data.length > 0) {
-        this.transactions = response.data;
+    this.transService.getTransactions().subscribe((response: any) => {
+      if (response && response.length > 0) {
+        this.transactions = response;
         this.filteredTransaction = this.transactions;
 
         // filter transactions if search has some value
@@ -37,15 +42,16 @@ export class TransactionsListComponent implements OnInit {
   }
 
   /**
-   * @param  {string} colorCode
+   * @param colorCode colorCode provide in transaction list
+   * @description get category color style
    */
-   getRandomColor = (colorCode: string) => {
+   getCategoryColor = (colorCode: string) => {
     return { 'border-left': '3px solid ' + colorCode };
   }
 
-  // TODO - value define type
   /**
-   * @param  {string} value
+   * @param value search text
+   * @description filter transaction list on the basis of marchant name
    */
   search = (value: string) => {
     this.searchCriteria = value;

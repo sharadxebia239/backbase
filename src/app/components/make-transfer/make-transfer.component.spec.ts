@@ -6,7 +6,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('MakeTransferComponent', () => {
   let component: MakeTransferComponent;
   let fixture: ComponentFixture<MakeTransferComponent>;
-  // TODO - Naming convention 
+
+  // TODO - Naming convention
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -14,9 +15,9 @@ describe('MakeTransferComponent', () => {
         ReactiveFormsModule,
         HttpClientTestingModule
       ],
-      declarations: [ MakeTransferComponent ]
+      declarations: [MakeTransferComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -27,6 +28,12 @@ describe('MakeTransferComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should contain a form with 3 controls', () => {
+    expect(component.makeTransferForm.contains('fromAccount')).toBe(true);
+    expect(component.makeTransferForm.contains('toAccount')).toBe(true);
+    expect(component.makeTransferForm.contains('amount')).toBe(true);
   });
 
   it('form invalid when empty', () => {
@@ -54,10 +61,9 @@ describe('MakeTransferComponent', () => {
     const patternName = 'pattern';
     const requiredPatternName = 'requiredPattern';
 
-    // 
+    // It should be mandetory
     expect(amountControl.valid).toBeFalsy();
 
-    
     errors = amountControl.errors || {};
     expect(errors[requiredName]).toBeTruthy();
 
@@ -107,12 +113,13 @@ describe('MakeTransferComponent', () => {
     const amountName = 'amount';
 
     expect(component.makeTransferForm.valid).toBeFalsy();
-    component.totalBalance = '1000';
+    component.totalBalance = 1000;
     component.makeTransferForm.controls[toAccountName].setValue('SBBI12345678');
-    component.makeTransferForm.controls[amountName].setValue('1600');
+    component.makeTransferForm.controls[amountName].setValue(1600);
 
     // Trigger the submit function
     component.submit();
+    console.log(component.isAmountInvalid);
     expect(component.isAccountInvalid).toBeFalsy();
     expect(component.isAmountInvalid).toBeTruthy();
     expect(component.amountErrorMessage).toContain('It should not allow amount below the total balance of -€500');

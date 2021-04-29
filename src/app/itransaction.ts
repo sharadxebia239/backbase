@@ -1,12 +1,12 @@
 export interface Itransaction {
-    categoryCode: string,
+    categoryCode: string;
     dates: {
         valueDate: Date
-    },
+    };
     merchant: {
         accountNumber: string,
         name: string
-    },
+    };
     transaction: {
         amountCurrency: {
             amount: number,
@@ -14,6 +14,5 @@ export interface Itransaction {
         },
         creditDebitIndicator: string,
         type: string
-    }
-    
+    };
 }

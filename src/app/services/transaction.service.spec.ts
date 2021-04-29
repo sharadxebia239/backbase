@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { ApiService } from './api.service';
+import { TransactionService } from './transaction.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ApiService', () => {
-  let service: ApiService;
+  let service: TransactionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -11,15 +11,15 @@ describe('ApiService', () => {
         HttpClientTestingModule
       ]
     });
-    service = TestBed.inject(ApiService);
+    service = TestBed.inject(TransactionService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should exist getTransactionsFromJSON', () => {
-    expect(service.getTransactionsFromJSON).toBeDefined();
+  it('should exist getTransactionsList', () => {
+    expect(service.getTransactionsList).toBeDefined();
   });
 
   it('should exist getTransactions', () => {

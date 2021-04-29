@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionsListComponent } from './transactions-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('TransactionsListComponent', () => {
   let component: TransactionsListComponent;
@@ -8,9 +9,10 @@ describe('TransactionsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TransactionsListComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [TransactionsListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -23,16 +25,16 @@ describe('TransactionsListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('getRandomColor should return value', () => {
-    expect(component.getRandomColor).toMatch('border-left');
-    expect(component.getRandomColor.call).toBeTruthy();
+  it('getCategoryColor should return value', () => {
+    const randomColor = component.getCategoryColor('#ffffff');
+    expect(typeof randomColor).toBe('object');
   });
 
   it('should filter the value', () => {
-    component.search('1234');
-    expect(component.searchCriteria).toBe('1234');
-
     component.search('');
     expect(component.getTransactions.call).toBeTruthy();
+
+    component.search('1234');
+    expect(component.searchCriteria).toBe('1234');
   });
 });

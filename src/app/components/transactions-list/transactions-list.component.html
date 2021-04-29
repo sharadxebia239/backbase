@@ -9,10 +9,10 @@
             <!-- content projection start -->
             <app-transaction-item class="row">
                 <div class="col-1 no-padding" data-test-hook='transactionColour'>
-                    <div class="color" [ngStyle]="getRandomColor(transaction.categoryCode)"></div>
+                    <div class="color" [ngStyle]="getCategoryColor(transaction.categoryCode)"></div>
                 </div>
                 <div class="col-2 align-middle no-padding" data-test-hook='transactionDate'>
-                    {{transaction.dates.valueDate | date: 'MMM, YY'}}</div>
+                    {{transaction.dates.valueDate | date: 'MMM. dd'}}</div>
                 <strong data-test-hook='transactionMerchantName'>{{transaction.merchant.name}}</strong>
                 <p data-test-hook='transactionType'>{{transaction.transaction.type}}</p>
                 <div class="col float-right align-middle" data-test-hook='transactionAmount'
@@ -28,7 +28,7 @@
         <li class="list-group-item">
             <app-transaction-item class="row">
                 <div class="col-1 no-padding" data-test-hook='transactionColour'>
-                    <div class="color" [ngStyle]="getRandomColor()"></div>
+                    <div class="color" [ngStyle]="getCategoryColor('#e25a2c')"></div>
                 </div>
                 <strong data-test-hook='transactionMerchantName'>No Record Found!</strong>
             </app-transaction-item>
