@@ -46,16 +46,8 @@ export class TransactionsListComponent implements OnInit, OnDestroy {
    * @returns void
    */
   ngOnDestroy(): void {
-    // unsubscribe the transaction service
+    // unsubscribe the transaction subscription
     this.transactionSubscription.unsubscribe();
-  }
-
-  /**
-   * @param colorCode colorCode provide in transaction list
-   * @description get category color style
-   */
-   getCategoryColor = (colorCode: string) => {
-    return { 'border-left': '3px solid ' + colorCode };
   }
 
   /**

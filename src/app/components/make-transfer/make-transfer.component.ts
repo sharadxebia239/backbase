@@ -22,7 +22,7 @@ export class MakeTransferComponent implements OnInit {
   public toAccount: string;
   public transactionAmount: number;
   public currency: string = environment.currency;
-  public transactionNewObject: Itransaction;
+  public transactionObject: Itransaction;
 
   constructor(private fb: FormBuilder, private confirmationService: NgbModal, private transService: TransactionService) {
   }
@@ -95,7 +95,7 @@ export class MakeTransferComponent implements OnInit {
       if (result === 'Save') {
 
         // create new transaction object
-        this.transactionNewObject = {
+        this.transactionObject = {
           categoryCode: '#e25a2c',
           dates: {
             valueDate: new Date()
@@ -115,7 +115,7 @@ export class MakeTransferComponent implements OnInit {
         };
 
         // update transaction list
-        this.transService.createTransaction(this.transactionNewObject);
+        this.transService.createTransaction(this.transactionObject);
 
         // deduct the transfer amount from total balance
         this.totalBalance = this.totalBalance - this.transactionAmount;

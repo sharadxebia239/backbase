@@ -27,11 +27,6 @@ describe('TransactionsListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('getCategoryColor should return value', () => {
-    const categoryCode = component.getCategoryColor('#ffffff');
-    expect(typeof categoryCode).toBe('object');
-  });
-
   it('should filter the value', () => {
     component.search('');
     expect(component.getTransactions.call).toBeTruthy();

@@ -9,7 +9,7 @@
             <!-- content projection start -->
             <app-transaction-item class="row">
                 <div class="col-1 no-padding" data-test-hook='transactionColour'>
-                    <div class="color" [ngStyle]="getCategoryColor(transaction.categoryCode)"></div>
+                    <div class="color" [ngStyle]="{'border-color': transaction.categoryCode}"></div>
                 </div>
                 <div class="col-2 align-middle no-padding" data-test-hook='transactionDate'>
                     {{transaction.dates.valueDate | date: 'MMM. dd'}}</div>

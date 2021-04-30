@@ -1,5 +1,5 @@
-@import '../../../mixins';
-@import '../../../vars';
+@import '../../../theme/scss/mixins';
+@import '../../../theme/scss/vars';
 
 .formHeader {
     @include formHeader;
@@ -24,6 +24,7 @@
         padding: 20px;
         .color {
             height: 100%;
+            border-left: 3px solid;
         }
         .row {
             p {
