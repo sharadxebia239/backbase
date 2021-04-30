@@ -8,7 +8,7 @@ import { Itransaction } from '../itransaction';
 })
 export class TransactionService {
 
-  private transactions: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public transactions: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   constructor(private httpClient: HttpClient) { }
 
   /**

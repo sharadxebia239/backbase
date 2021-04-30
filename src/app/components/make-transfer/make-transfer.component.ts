@@ -22,8 +22,7 @@ export class MakeTransferComponent implements OnInit {
   public toAccount: string;
   public transactionAmount: number;
   public currency: string = environment.currency;
-  private transactions: Array<Itransaction> = [];
-  private transactionNewObject: Itransaction;
+  public transactionNewObject: Itransaction;
 
   constructor(private fb: FormBuilder, private confirmationService: NgbModal, private transService: TransactionService) {
   }

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionsListComponent } from './transactions-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TransactionsListComponent', () => {
   let component: TransactionsListComponent;
@@ -10,7 +11,8 @@ describe('TransactionsListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [TransactionsListComponent]
+      declarations: [TransactionsListComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   });
@@ -26,8 +28,8 @@ describe('TransactionsListComponent', () => {
   });
 
   it('getCategoryColor should return value', () => {
-    const randomColor = component.getCategoryColor('#ffffff');
-    expect(typeof randomColor).toBe('object');
+    const categoryCode = component.getCategoryColor('#ffffff');
+    expect(typeof categoryCode).toBe('object');
   });
 
   it('should filter the value', () => {

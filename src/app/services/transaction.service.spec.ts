@@ -29,4 +29,8 @@ describe('ApiService', () => {
   it('should exist setTransaction', () => {
     expect(service.setTransaction).toBeDefined();
   });
+
+  it('should exist createTransaction', () => {
+    expect(service.createTransaction).toBeDefined();
+  });
 });

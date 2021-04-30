@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MakeTransferComponent } from './make-transfer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TransactionService } from 'src/app/services/transaction.service';
 
 describe('MakeTransferComponent', () => {
   let component: MakeTransferComponent;
@@ -15,7 +17,8 @@ describe('MakeTransferComponent', () => {
         ReactiveFormsModule,
         HttpClientTestingModule
       ],
-      declarations: [MakeTransferComponent]
+      declarations: [MakeTransferComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   });
@@ -119,7 +122,6 @@ describe('MakeTransferComponent', () => {
 
     // Trigger the submit function
     component.submit();
-    console.log(component.isAmountInvalid);
     expect(component.isAccountInvalid).toBeFalsy();
     expect(component.isAmountInvalid).toBeTruthy();
     expect(component.amountErrorMessage).toContain('It should not allow amount below the total balance of -€500');
