@@ -44,11 +44,12 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Executed 24 of 24 SUCCESS
 
 `Code Coverage Summary`:
+```shell
 Statements   : 77.78% ( 84/108 )
 Branches     : 80.77% ( 21/26 )
 Functions    : 61.29% ( 19/31 )
 Lines        : 78.72% ( 74/94 )
-
+```
 ## Running lint
 
 Run `ng lint` to execute the lint. All files pass linting.
