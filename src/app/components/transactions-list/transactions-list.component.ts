@@ -10,7 +10,7 @@ import { TransactionService } from 'src/app/services/transaction.service';
 export class TransactionsListComponent implements OnInit {
 
   public transactions: Array<Itransaction> = [];
-  public filteredTransaction: Array<Itransaction> = [];
+  public filteredTransactions: Array<Itransaction> = [];
   public searchCriteria = '';
   constructor(private transService: TransactionService) { }
 
@@ -29,7 +29,7 @@ export class TransactionsListComponent implements OnInit {
     this.transService.getTransactions().subscribe((response: any) => {
       if (response && response.length > 0) {
         this.transactions = response;
-        this.filteredTransaction = this.transactions;
+        this.filteredTransactions = this.transactions;
         // filter transactions if search has some value
         if (this.searchCriteria) {
           this.search(this.searchCriteria);
@@ -57,7 +57,7 @@ export class TransactionsListComponent implements OnInit {
     if (!value) {
       this.getTransactions();
     } // when nothing has typed
-    this.filteredTransaction = Object.assign([], this.transactions).filter(
+    this.filteredTransactions = Object.assign([], this.transactions).filter(
       item => item.merchant.name.toLowerCase().indexOf(value.toLowerCase()) > -1
     );
   }

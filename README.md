@@ -40,4 +40,4 @@ Run `ng lint` to execute the lint.
 
 1. `Make transfer form validation` - Best practice is to manage validation inside template but as mentioned into the user story that do not make any changes in provided UI Component, so not able to do any changes in Submit button, due to which move validation from template to ts.
 2. `Frontend Technical Assignment` - Not showing, assuming this is only for showing purpose.
-3. `Transactions List Data` - Implementation is like first hit the provided transaction url and if that url not providing the correct result, so fetch data from json file.  
+3. `Transactions List Data` - Implementation is like first hit the provided transaction url and if that url is not providing the result, so fetch data from json file.  

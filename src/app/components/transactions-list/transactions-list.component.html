@@ -4,8 +4,8 @@
 </div>
 <div class="container p-4">
     <app-filter (inputChange)="search($event);"></app-filter>
-    <ul class="list-group" *ngIf="filteredTransaction.length > 0">
-        <li class="list-group-item" *ngFor="let transaction of filteredTransaction">
+    <ul class="list-group" *ngIf="filteredTransactions.length > 0">
+        <li class="list-group-item" *ngFor="let transaction of filteredTransactions">
             <!-- content projection start -->
             <app-transaction-item class="row">
                 <div class="col-1 no-padding" data-test-hook='transactionColour'>
@@ -24,7 +24,7 @@
             <!-- / content projection end -->
         </li>
     </ul>
-    <ul class="list-group" *ngIf="filteredTransaction.length == 0">
+    <ul class="list-group" *ngIf="filteredTransactions.length == 0">
         <li class="list-group-item">
             <app-transaction-item class="row">
                 <div class="col-1 no-padding" data-test-hook='transactionColour'>
