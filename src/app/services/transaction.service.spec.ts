@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { TransactionService } from './transaction.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Itransaction } from '../interfaces/itransaction';
-import { Itransactions } from '../interfaces/itransactions';
 
 describe('ApiService', () => {
   let service: TransactionService;
