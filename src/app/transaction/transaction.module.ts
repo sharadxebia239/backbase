@@ -4,15 +4,15 @@ import { TransactionsListComponent } from './transactions-list/transactions-list
 import { FilterComponent } from './filter/filter.component';
 import { TransactionItemComponent } from './transaction-item/transaction-item.component';
 
+const COMPONENTS = [
+  TransactionItemComponent,
+  TransactionsListComponent,
+  FilterComponent
+];
+
 @NgModule({
-  declarations: [
-    TransactionItemComponent,
-    TransactionsListComponent,
-    FilterComponent
-  ],
-  exports: [
-    TransactionsListComponent
-  ],
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
   imports: [
     CommonModule
   ],
