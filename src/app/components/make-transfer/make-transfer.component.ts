@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { formatCurrency } from '@angular/common';
-import { Itransaction } from 'src/app/itransaction';
+import { Itransaction } from 'src/app/interfaces/itransaction';
 
 @Component({
   selector: 'app-make-transfer',
@@ -86,9 +86,10 @@ export class MakeTransferComponent implements OnInit {
   }
 
   /**
+   * @returns void
    * @description open modal
    */
-  open = () => {
+  open = (): void => {
     this.confirmationService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result: string) => {
       // When user click on "Send Transfer" button
       if (result === 'Save') {

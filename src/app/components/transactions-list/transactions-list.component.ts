@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Itransaction } from 'src/app/itransaction';
+import { Subscription } from 'rxjs';
+import { Itransaction } from 'src/app/interfaces/itransaction';
 import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
@@ -8,10 +9,11 @@ import { TransactionService } from 'src/app/services/transaction.service';
   styleUrls: ['./transactions-list.component.scss']
 })
 export class TransactionsListComponent implements OnInit {
-
+  // variable declaration
   public transactions: Array<Itransaction> = [];
   public filteredTransactions: Array<Itransaction> = [];
   public searchCriteria = '';
+  private transactionSubscription: Subscription;
   constructor(private transService: TransactionService) { }
 
   /**
@@ -26,7 +28,7 @@ export class TransactionsListComponent implements OnInit {
    * @description get transaction data
    */
   getTransactions = () => {
-    this.transService.getTransactions().subscribe((response: any) => {
+    this.transactionSubscription = this.transService.getTransactions().subscribe((response: Array<Itransaction>) => {
       if (response && response.length > 0) {
         this.transactions = response;
         this.filteredTransactions = this.transactions;
@@ -38,6 +40,14 @@ export class TransactionsListComponent implements OnInit {
     }, error => {
       console.error(error);
     });
+  }
+  
+  /**
+   * @returns void
+   */
+  ngOnDestroy(): void {
+    // unsubscribe the transaction service
+    this.transactionSubscription.unsubscribe();
   }
 
   /**

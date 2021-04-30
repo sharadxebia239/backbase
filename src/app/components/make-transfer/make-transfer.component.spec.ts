@@ -3,7 +3,6 @@ import { MakeTransferComponent } from './make-transfer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { TransactionService } from 'src/app/services/transaction.service';
 
 describe('MakeTransferComponent', () => {
   let component: MakeTransferComponent;
