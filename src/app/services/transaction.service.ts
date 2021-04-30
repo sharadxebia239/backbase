@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Itransaction } from '../itransaction';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,13 @@ export class TransactionService {
    * @description get transactions data from json file
    */
   getTransactionsList = () => {
-    this.httpClient.get('https://r9vdzv10vd.execute-api.eu-central-1.amazonaws.com/dev/transactions').subscribe((response: any) => {
+    this.httpClient.get(environment.transactionAPI).subscribe((response: any) => {
       response.data.sort((a, b) => new Date(b.dates.valueDate).getTime() - new Date(a.dates.valueDate).getTime());
       this.transactions.next(response.data);
     }, apiError => {
-      // if above URL is not working properly
-      this.httpClient.get('assets/transactions.json').subscribe((response: any) => {
+      console.debug('picking up data from local file');
+      // picking the data from transction.json file if the above API is not responding
+      this.httpClient.get(environment.transactionLocalFile).subscribe((response: any) => {
         response.data.sort((a, b) => new Date(b.dates.valueDate).getTime() - new Date(a.dates.valueDate).getTime());
         this.transactions.next(response.data);
       }, error => {
