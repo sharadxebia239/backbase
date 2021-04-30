@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { MakeTransferComponent } from './components/make-transfer/make-transfer.component';
 import { SubmitButtonComponent } from './components/submit-button/submit-button.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -15,9 +14,7 @@ import { TransactionModule } from './transaction/transaction.module';
 const COMPONENTS = [
   AppComponent,
   FooterComponent,
-  LogoComponent,
-  SubmitButtonComponent,
-  MakeTransferComponent
+  LogoComponent
 ];
 
 @NgModule({
