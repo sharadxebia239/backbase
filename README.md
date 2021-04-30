@@ -41,13 +41,13 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). Find the below test report along with code coverage:
 
 `Test Report`:
-Executed 25 of 25 SUCCESS
+Executed 24 of 24 SUCCESS
 
 `Code Coverage Summary`:
-Statements   : 73.39% ( 80/109 )
+Statements   : 73.15% ( 79/108 )
 Branches     : 80.77% ( 21/26 )
 Functions    : 54.84% ( 17/31 )
-Lines        : 73.68% ( 70/95 )
+Lines        : 73.4% ( 69/94 )
 
 ## Running lint
 
