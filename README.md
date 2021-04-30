@@ -3,11 +3,12 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9.
 
 ## Environment
-
+```shell
 npm version - 6.14.12
 Angular CLI version - 11.2.9
 Node version - 14.16.1
 Typescript version - 4.1.5
+```
 
 ## Development server
 
