@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Itransaction } from 'src/app/interfaces/itransaction';
 import { TransactionService } from 'src/app/services/transaction.service';
@@ -8,7 +8,7 @@ import { TransactionService } from 'src/app/services/transaction.service';
   templateUrl: './transactions-list.component.html',
   styleUrls: ['./transactions-list.component.scss']
 })
-export class TransactionsListComponent implements OnInit {
+export class TransactionsListComponent implements OnInit, OnDestroy {
   // variable declaration
   public transactions: Array<Itransaction> = [];
   public filteredTransactions: Array<Itransaction> = [];
@@ -41,7 +41,7 @@ export class TransactionsListComponent implements OnInit {
       console.error(error);
     });
   }
-  
+
   /**
    * @returns void
    */

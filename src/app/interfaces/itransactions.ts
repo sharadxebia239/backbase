@@ -1,4 +1,4 @@
-import { Itransaction } from "./itransaction";
+import { Itransaction } from './itransaction';
 
 export interface Itransactions {
     data: [Itransaction];
